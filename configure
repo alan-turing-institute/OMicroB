@@ -302,8 +302,8 @@ function target_microbit () {
 for target in ${TARGETS[@]}
 do
     case "$target" in
-        avr) target_avr;;
-        pic32) target_pic32;;
+        # avr) target_avr;;
+        # pic32) target_pic32;;
         microbit) target_microbit;;
     *) echo "Unsupported target \"$target\""
     esac
