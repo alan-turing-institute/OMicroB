@@ -106,4 +106,11 @@ SECTIONS {
 
     /* Check if data + stack exceeds RAM limit */
     ASSERT(__stack_limit >= __end, "region RAM overlaps with stack")
+
+    .ARM.exidx :
+    {
+    __exidx_start = .;
+    *(.ARM.exidx*)
+    __exidx_end = .;
+    } >FLASH
 }
