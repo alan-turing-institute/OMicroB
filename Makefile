@@ -1,4 +1,5 @@
 include etc/Makefile.conf
+$(info ARCHS=$(ARCHS))
 
 all: internals $(ARCHS) simulators
 
