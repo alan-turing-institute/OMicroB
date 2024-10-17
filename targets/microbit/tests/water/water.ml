@@ -15,9 +15,9 @@ type state = {
   heater_on:bool;
 }
 
-let round_to_decimals x n =
+(* let round_to_decimals x n =
   let factor = 10. ** float_of_int n in
-  floor (x *. factor +. 0.5) /. factor
+  floor (x *. factor +. 0.5) /. factor *)
 
 let calculate_heating 
   (config: parameters )
@@ -60,27 +60,23 @@ let step_temperature (current_state: state) (p: parameters): state =
   }
 
 let rec event_loop (current:state) (p: parameters) :state  =
-  let cast_float = string_of_float @@ round_to_decimals current.water_celcius 1 in
-    print_string cast_float;
-
-  (* if current.heater_on 
-    then (set_pixel 0 4 true;)
-    else  (set_pixel 0 4 false;); *)
-  (* | true -> set_pixel 0 4 true;
-  | false -> set_pixel 0 4 false; *)
+  (* if ButtonA.is_on ()
+    then print_string "ON"
+    else print_string "OFF"; *)
+  
+  print_int @@ int_of_float current.water_celcius;
 
   match ButtonB.is_on () with
   | true -> let new_state = step_temperature current p in
-  event_loop new_state p
+    event_loop new_state p
   | false -> event_loop current p
-  
   
 let _ =
   let p:parameters = { 
     ambient_celcius = 25.0; 
-    water_kg = 1000.0; 
+    water_kg = 10.0; 
     heat_capacity_jkgc = 4186.0; 
-    power_watts = 30.0; 
+    power_watts = 300.0; 
     cooling_constant = 0.01;
     time_step_seconds = 60.0;
     } in
